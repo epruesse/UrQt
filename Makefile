@@ -1,8 +1,9 @@
 CC=g++
-CFLAGS=-std=c++0x -pthread
-CFLAGSTATIC=-std=c++0x -Wl,--whole-archive -lpthread -Wl,--no-whole-archive -static-libgcc -static-libstdc++ -static
+CFLAGS_COMMON=-std=c++0x -O2
+CFLAGS=$(CFLAGS_COMMON) -pthread
+CFLAGSTATIC=$(CFLAGS_COMMON) -Wl,--whole-archive -lpthread -Wl,--no-whole-archive -static-libgcc -static-libstdc++ -static
 
-all:gzstream.o Read.o Segmentation.o UrQt.cpp
+all: gzstream.o Read.o Segmentation.o UrQt.cpp
 	$(CC) $(CFLAGS) gzstream.o Read.o Segmentation.o UrQt.cpp -lz -o UrQt
 
 Segmentation.o: Segmentation.cpp
